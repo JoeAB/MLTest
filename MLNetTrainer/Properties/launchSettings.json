@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "MLNetTrainer": {
+      "commandName": "Project",
+      "commandLineArgs": "\"C:\\fatCat2.jpg\""
+    }
+  }
+}
