@@ -26,5 +26,19 @@ namespace MLNetTestCore
             Console.WriteLine($"Image: {Path.GetFileName(imagePath)} predicted as: {result.PredictedLabel} with score: {result.Score.Max()} ");
 
         }
+
+
+        public static String ClassifyCatOrDogFronBytes(Byte[] data)
+        {
+   
+            Cat_dog.ModelInput sampleData = new Cat_dog.ModelInput()
+            {
+                ImageSource = data,
+            };
+
+            //Load model and predict output
+            var result = Cat_dog.Predict(sampleData);
+            return result.PredictedLabel;
+        }
     }
 }

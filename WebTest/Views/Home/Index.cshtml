@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Drag or upload a picture of a cat or dog to get a prediction.</p>
+    <input type="file" id="mlTestFile" />
+    <br />
+    <img id="showImage" src="#" alt="your image" height="250" width="250"/>
+
+    <div id="resultZone"></div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () { // this waits until the document is fully loaded
+        $('#mlTestFile').on('change', function () {
+            var myFile = $(this).prop('files')[0];
+            var formData = new FormData();
+            formData.append("files", myFile);
+            $('#showImage').prop('src', URL.createObjectURL(myFile));
+ 
+
+            $.ajax({
+                url: '/Home/TestImage',
+                type: "POST",
+                contentType: false, // Not to set any content header  
+                processData: false, // Not to process data  
+                data: formData,
+                success: function (result) {
+                    $('#resultZone').html("Predicted class: "+result)
+                },
+                error: function (err) {
+                    alert('failure');
+                }
+            });
+        });
+    });
+</script>
